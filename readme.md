@@ -199,3 +199,37 @@ module.exports = {
 <p align="center">
     <img src="https://user-images.githubusercontent.com/8760590/123557162-9dcee380-d74c-11eb-99d7-80a6e718ee74.png" width="450">
 </p>
+
+15. Now that we have `webpack` handling all our dependencies, creating a bundle.js file that will be passed to the browser, and that file executing our code that we placed in products -> index.js file, the final thing we have to do is render our faker output to the html page instead of the console. To do this we simply utilize standard javascript to insert the faker names to the html file. 
+
+```javascript 
+// ecomm/products/src/index.js file
+import faker from 'faker';
+
+let products = '';
+
+for (let i = 0; i < 3; i++) {
+    const name = faker.commerce.productName();
+    products += `<div>${name}</div>`;
+}
+
+document.querySelector('#dev-products').innerHTML = products
+```
+
+```html
+<!-- ecomm/public/index.html file -->
+<html lang="en">
+  <head>
+    <title>Product MFE</title>
+  </head>
+  <body>
+    <div id="dev-products"></div>
+  </body>
+</html>
+```
+
+16. Restart the sever and validate in the browser that the html now renders the faker info for 3 products
+
+<p align="center">
+    <img src="https://user-images.githubusercontent.com/8760590/123557540-9f99a680-d74e-11eb-9bce-143317e4c639.png" width="450">
+</p>
