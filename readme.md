@@ -42,3 +42,23 @@
 </p>
 
 -------
+
+## Project Setup 
+
+### SPA Ecommerce Application
+<p align="center">
+    <image src="https://user-images.githubusercontent.com/8760590/123554227-3c067d80-d73c-11eb-9fa5-5a77974cbf75.png" width="450">
+</p>
+
+> From a functionality standpoint you have something like this...
+
+<p align="center">
+    <image src="https://user-images.githubusercontent.com/8760590/123554241-46c11280-d73c-11eb-8a81-9546e5434c13.png" width="450">
+</p>
+
+> Where the functionality is still monolithic but can be thought of as 2 microservices... 
+
+<p align="center">
+    <image src="https://user-images.githubusercontent.com/8760590/123554173-0eb9cf80-d73c-11eb-90b9-1a603f7bdd98.png" width="450">
+</p>
+
