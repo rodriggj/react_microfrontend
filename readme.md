@@ -59,6 +59,17 @@
 > Where the functionality is still monolithic but can be thought of as 2 microservices... 
 
 <p align="center">
+    <image src="https://user-images.githubusercontent.com/8760590/123554404-175ed580-d73d-11eb-8e60-321b6fad2424.png" width="450">
+</p>
+
+> Therefore our project setup will effectively be constructed with vanilla javascript, and webpack, at least initially to look like this ...
+
+<p align="center">
+    <image src="https://user-images.githubusercontent.com/8760590/123554467-5a20ad80-d73d-11eb-93d3-14bc18c40646.png" width="450">
+</p>
+
+<p align="center">
     <image src="https://user-images.githubusercontent.com/8760590/123554173-0eb9cf80-d73c-11eb-90b9-1a603f7bdd98.png" width="450">
 </p>
 
+--------
