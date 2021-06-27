@@ -73,3 +73,9 @@
 </p>
 
 --------
+
+## `Container` Application (aka Integration / "Orchestrator" )
+
+<p align="center">
+    <image src="https://user-images.githubusercontent.com/8760590/123554530-ae2b9200-d73d-11eb-8e2d-f756c2feac2f.png" width="450">
+</p>
