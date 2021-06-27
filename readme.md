@@ -9,19 +9,23 @@
 ------
 
 ###  Build Time Integration 
-
-![image](https://user-images.githubusercontent.com/8760590/123553714-314ae900-d73a-11eb-8466-9b9936871f4d.png)
+<p align="center">
+    ![image](https://user-images.githubusercontent.com/8760590/123553714-314ae900-d73a-11eb-8466-9b9936871f4d.png)
+</p>
 
 ##### Pros/Cons
-![image](https://user-images.githubusercontent.com/8760590/123553747-57708900-d73a-11eb-8209-8737334708f6.png)
-
+<p align="center">
+    ![image](https://user-images.githubusercontent.com/8760590/123553747-57708900-d73a-11eb-8209-8737334708f6.png)
+</p>
 -------
 
 ### Run Time Integration 
-
-![image](https://user-images.githubusercontent.com/8760590/123553779-796a0b80-d73a-11eb-9d13-91dd8b672b3a.png)
+<p align="center">
+    ![image](https://user-images.githubusercontent.com/8760590/123553779-796a0b80-d73a-11eb-9d13-91dd8b672b3a.png)
+</p>    
 
 ##### Pros/Cons
-![image](https://user-images.githubusercontent.com/8760590/123553802-8be44500-d73a-11eb-9578-a23e52f763cf.png)
-
+<p align="center">
+    ![image](https://user-images.githubusercontent.com/8760590/123553802-8be44500-d73a-11eb-9578-a23e52f763cf.png)
+</p>
 -------
