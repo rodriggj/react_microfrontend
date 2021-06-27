@@ -94,7 +94,7 @@ npm run start
 
 10. Now that that single file has been produced, we need some means of reading the file and all the combined code from our webpack bundle. This will be done using `webpack-server`. To configure this server to read the file, we will need to make 2 changes: 
 
-1. A small modification to our `webpack.config.js` file to add a `devServer` node with the port specified
++ 1. A small modification to our `webpack.config.js` file to add a `devServer` node with the port specified
 
 ```javascript
 // webpack.config.js file
@@ -106,7 +106,7 @@ module.exports = {
 };
 ```
 
-2. You will also need to modify the `package.json` file to modify the `start` script. Add the `serve` term to the previous `start` command from _Step 8_ above.
++ 2. You will also need to modify the `package.json` file to modify the `start` script. Add the `serve` term to the previous `start` command from _Step 8_ above.
 
 ```javascript
    "scripts": {
