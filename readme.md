@@ -87,3 +87,36 @@ npm run start
 <p align="center">
     <img src="https://user-images.githubusercontent.com/8760590/123555787-1e89e180-d745-11eb-835d-9480fd1fc2c1.png" width="450">
 </p>
+
+- [ ] When we have to include dependencies in our application build, we don't want to have to load a series of files to the browser. 
+- [ ] Webpack handeles this problem for us by taking all our dependency files and bundling the files into a single file, in this case the file called `main.js`. Sometimes this `main.js` file may also be named, `bundle.js`. 
+- [ ] So in this example the `main.js` _bundled_ our `index.js` file for products, the `faker` files, and all our supporting files (e.g package.json) and combined them to a single file to be provided to the browser called, `main.js`.
+
+10. Now that that single file has been produced, we need some means of reading the file and all the combined code from our webpack bundle. This will be done using `webpack-server`. To configure this server to read the file, we will need to make 2 changes: 
+
+1. A small modification to our `webpack.config.js` file to add a `devServer` node with the port specified
+
+```javascript
+// webpack.config.js file
+module.exports = {
+    mode: "development",
+    devServer: {
+        port: 8081,
+    }
+};
+```
+
+2. You will also need to modify the `package.json` file to modify the `start` script. Add the `serve` term to the previous `start` command from _Step 8_ above.
+
+```javascript
+   "scripts": {
+    "start": "webpack serve"
+  },
+```
+
+> __NOTE:__ This is a graphical depiction of what is going on ... 
+<p align="center">
+    <img src="https://user-images.githubusercontent.com/8760590/123556087-9278b980-d746-11eb-8f35-7152678c590b.png" width="450">
+</p>
+
+
