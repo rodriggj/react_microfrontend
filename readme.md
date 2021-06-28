@@ -196,9 +196,7 @@ module.exports = {
     <img src="https://user-images.githubusercontent.com/8760590/123557114-4fb9e000-d74c-11eb-921c-10675042659a.png" width="450">
 </p>
 
-<p align="center">
-    <img src="https://user-images.githubusercontent.com/8760590/123557162-9dcee380-d74c-11eb-99d7-80a6e718ee74.png" width="450">
-</p>
+
 
 15. Now that we have `webpack` handling all our dependencies, creating a bundle.js file that will be passed to the browser, and that file executing our code that we placed in products -> index.js file, the final thing we have to do is render our faker output to the html page instead of the console. To do this we simply utilize standard javascript to insert the faker names to the html file. 
 
@@ -233,3 +231,73 @@ document.querySelector('#dev-products').innerHTML = products
 <p align="center">
     <img src="https://user-images.githubusercontent.com/8760590/123557540-9f99a680-d74e-11eb-9bce-143317e4c639.png" width="450">
 </p>
+
+17. To complete this initial build we will complete the scafolding for the `container` MFE. Let's begin by creating a directory structure to house the `container` MFE and the `npm init` process and dependencies just like Steps 1 - 5 of the `products` MFE. Nav to the `ecom` app and execute the following. 
+
+```javascript 
+mkdir container
+cd container
+npm init -y 
+npm install webpack webpack-cli webpack-dev-server html-webpack-plugin nodemon --save
+mkdir src
+cd src && code index.js
+```
+
+```javascript
+// on index.js file 
+console.log('Container!');
+```
+
+> __NOTE:__ There is no `faker` package. We added `nodemon` package
+
+18. Create a directory for the html view, just like we did in _Step 12_ above. Populate the index.html with boiler plate html code. 
+
+```javascript 
+mkdir ecomm/container/public
+code ecomm/container/public/index.html
+```
+
+```html
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Container MFE</title>
+  </head>
+  <body>
+    <h1>Inside the Container</h1>
+  </body>
+</html>
+```
+
+19. Create and configure the `webpack.config.js` file just like we did on _Step 13_. Within the file add the boilerplate code.
+
+```javscript 
+cd ecomm
+code webpack.config.js
+```
+
+```javascript 
+// webpack.config.js file 
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
+module.exports = {
+    mode: 'development', 
+    devServer: {
+        port: 8080
+    }, 
+    plugins: [
+        new HtmlWebpackPlugin ({
+            template: './public/index.html'
+        })
+    ]
+}
+```
+
+20. Finally we need to modify the `package.json` to configure the scripts. 
+
+```javascript 
+  "scripts": {
+    "start": "webpack serve"
+  }
+```
+
