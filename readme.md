@@ -155,3 +155,30 @@ npm run start
 <p align="center">
   <img src="https://user-images.githubusercontent.com/8760590/124178739-0f6da100-da6f-11eb-8d2b-9567be24151f.png" width="450">
 </p>
+
+You can validate this flow in the Google Dev Tools 
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/8760590/124178943-5360a600-da6f-11eb-9b9b-a4d42c7ba776.png" width="450">
+</p>
+
+
+## Understanding the `webpack.config.js` input 
+
+#### Container `webpack.config.js` file
+
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/8760590/124179143-9de22280-da6f-11eb-9e29-d15fa0c9568e.png" width="450">
+</p>
+
+##### Products `webpack.config.js` file
+
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/8760590/124179434-18ab3d80-da70-11eb-8b5f-7263743bab9f.png" width="450">
+</p>
+
+##### How the 2 files relate 
+
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/8760590/124179716-73dd3000-da70-11eb-96be-16a72cf8ea58.png" width="450">
+</p>
+
