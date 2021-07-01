@@ -132,3 +132,20 @@ npm run start
 <p align="center">
   <img src="https://user-images.githubusercontent.com/8760590/124176670-6f167d00-da6c-11eb-9b82-210ea9fdab66.png" width="450">
 </p>
+
+## Explanation 
+
+#### Products MFE (aka REMOTE)
+- [ ] This is what `webpack` is doing in the `products` MFE
+
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/8760590/124177202-21e6db00-da6d-11eb-8dcc-4e0f3b07ae6c.png" width="450">
+</p>
+
+
+#### Container MFE (aka HOST)
+- [ ] This is what `webpack` is doing in the `container` MFE
+
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/8760590/124177802-f31d3480-da6d-11eb-8229-ef338f06709f.png" width="450">
+</p>
