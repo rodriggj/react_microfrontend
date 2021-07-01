@@ -149,3 +149,9 @@ npm run start
 <p align="center">
   <img src="https://user-images.githubusercontent.com/8760590/124177802-f31d3480-da6d-11eb-8229-ef338f06709f.png" width="450">
 </p>
+
+#### Combined Activity
+
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/8760590/124178739-0f6da100-da6f-11eb-8d2b-9567be24151f.png" width="450">
+</p>
