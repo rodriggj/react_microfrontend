@@ -332,3 +332,12 @@ console.log('Container!');
 <p align="center">
   <img src="https://user-images.githubusercontent.com/8760590/124355096-ba47a180-dbcc-11eb-9bcf-2d6375bbbe8a.png" width="450">
 </p>
+
+#### Development Process
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/8760590/124355303-9afd4400-dbcd-11eb-9d29-6297c147c7c4.png" width="450">
+</p>
+
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/8760590/124355350-e152a300-dbcd-11eb-9d4c-e963ae5471fe.png" width="450">
+</p>
