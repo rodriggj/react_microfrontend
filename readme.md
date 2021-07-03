@@ -255,3 +255,80 @@ module.exports = {
     ]
 }
 ```
+
+16. Now open a new terminal and run `npm run start` for your `cart` MFE. 
+
+> RESULTS: 
+
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/8760590/124354559-d5fd7880-dbc9-11eb-9710-9f660136880a.png" width="450">
+</p>
+
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/8760590/124354638-32609800-dbca-11eb-9982-ddef9b7f89cb.png" width="450">
+</p>
+
+17. Now let's integrate our `cart` to the `container` host. To do this we need to modify the `cart` `webpack.config.js` file. Here in the `ModuleFederationPlugin` / `remotes` section of our config we need to add `cart`. 
+
+```javascript
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPlugin')
+
+module.exports = {
+    mode: 'development',
+    devServer: {
+        port: 8082
+    },
+    plugins: [
+        new ModuleFederationPlugin({
+            name: 'container', 
+            remotes: {
+              products: 'products@http://localhost:8081/remoteEntry.js', 
+              cart: 'cart@http://localhost:8083/remoteEntry.js'
+            }
+        }),
+        new HtmlWebpackPlugin({
+            template: './public/index.html'
+        })
+    ]
+}
+```
+
+18. Then in our `container/src/bootstrap` file we also need to add an import statement. 
+
+```javascript
+import 'products/ProductsIndex'; 
+import 'cart/CartShow';
+
+console.log('Container!');
+```
+
+> NOTE: Recall what is going on here.... 
+1. First webpack is going to read the boostrap.js file, from `src` and see that there is an import statement for `cart`. 
+2. Webpack is then going to look into the `container/webpack.config.js` file and realize that the import statement for `cart` is aligned to the `remotes` section, and see that `cart` is at the URL location, which designates a `remoteEntry.js` file. Because the URL is pointing at the `cart` service webpack will recognize the `webpack.config.js` file fromt the `cart` service. 
+3. In the `cart` MFE is a webpack.config.js file where the `ModuleFederationPlugin` has a config attribute `name` which equals `cart`, with a fileName of `remoteEntry.js`. The config indicates to expose the `./CartShow` (which is what is referenced in the `container` bootstrap file), and when you reference `./CartShow` render the file at the path `./src/index` which happens to be our JS file that utilzes `faker` to render a div with a random number. 
+
+19. The last portion of this process is to make sure that the `container` html has a reference to the javascript query selector so it can render the content in the DOM. So in the `container/public/index.html` file, insert one more div with a ID to reference the `cart` javascript. 
+
+```html
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Container MFE</title>
+  </head>
+  <body>
+    <h1>Inside the Container</h1>
+    <div id="dev-products"></div>
+    <hr>
+    <div id="dev-cart"></div>
+  </body>
+</html>
+```
+
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/8760590/124355068-8e2c2080-dbcc-11eb-9319-f1d4ea0e5a8e.png" width="450">
+</p>
+
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/8760590/124355096-ba47a180-dbcc-11eb-9bcf-2d6375bbbe8a.png" width="450">
+</p>
