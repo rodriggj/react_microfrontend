@@ -182,3 +182,40 @@ You can validate this flow in the Google Dev Tools
   <img src="https://user-images.githubusercontent.com/8760590/124179716-73dd3000-da70-11eb-96be-16a72cf8ea58.png" width="450">
 </p>
 
+11. Now we'll add our last piece to this initial build which will be the `cart` MFE. Here we can create a directory called cart and to save a little time we can copy/paste the `package.json` file from the `products` MFE to the `cart` MFE. In the `package.json` file change the name from `products` to `cart`.
+
+```javascript
+mkdir ecomm/cart
+cp ecomm/products/package.json ecomm/cart
+```
+
+```javascript
+{
+  "name": "cart",
+  "version": "1.0.0",
+  "description": "",
+  ...
+}
+```
+
+12. Now nav to the `cart` dir and run `npm install` to install the `package.json` dependencies. 
+
+```javascript
+cd ecomm/cart
+npm i
+```
+
+13. In the `cart` dir, create a `public` dir and an `index.html` page with a div and an id called `dev-cart`.
+
+```html
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Cart MFE</title>
+  </head>
+  <body>
+    <h1>You are inside the Cart MFE</h1>
+    <div id="dev-cart"></div>
+  </body>
+</html>
+```
