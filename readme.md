@@ -345,3 +345,114 @@ console.log('Container!');
 - [ ] Benefits of using this pattern are that 3 different teams can all be working on functionality independent of one another. They can choose their own stack, own design process, and otherwise work entirely independent of the other two teams so long as they 1. use the `webpack` and 2. utilize the `ModuleFederationPlugin`
 
 - [ ] Realize also that the `index.html` files for the _Cart_ and _Products_ MFEs are not used in production. When we deploy the app, the _Container_ index.html file is the only file being rendered from a _View_ perspective. The _Cart_ and _Product_ .html file are really there for the independent teams to test and dev with. Therefore, these .html files are usually very light in CSS and other Markup. They are simply trying to render the functionatily. The only files that are going to prod deployment are the `index.js` files within the MFEs. 
+
+## Refactoring 
+
+#### Shared Module Federation 
+
+1. You may have noticed that both the `cart` and `products` MFE are using the `faker` module to create data. But each MFE is bringing in the same `faker` module which is 1. inefficient & 2. impacting performance as the file size for `faker` is 2.9M. 
+
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/8760590/124362633-613f3400-dbf3-11eb-9ba0-0d8185f95cd5.png" width="450">
+</p>
+
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/8760590/124362736-04904900-dbf4-11eb-9f8d-7f2f4bff2b68.png" width="450">
+</p>
+
+So the question is can we federate the modules that are being used between 2 different MFES and share the Faker module between the `cart` and `products` MFEs? It turns out we __CAN__ configure webpack to do this via the `ModuleFederationPlugin`. The steps to complete this Module Sharing are as follows...
+
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/8760590/124362787-5c2eb480-dbf4-11eb-8bb8-ff2d560164ee.png" width="450">
+</p>
+
+2. So navigate to the `products` MFE, and within the webpack.config.js file lets update the file, to inlcude an additional attribute `shared` in the `ModuleFederationPlugin` node. We will do the same in the `cart` webpack.config.js file as well. 
+
+```javascript 
+// products webpack.config.js file
+// truncated ... 
+    plugins: [
+        new ModuleFederationPlugin({
+            name: 'products', 
+            filename: 'remoteEntry.js', 
+            exposes: {
+              './ProductsIndex': './src/index'
+            }, 
+            shared: ['faker']
+          }),
+        new HtmlWebpackPlugin({
+            template: './public/index.html'
+        })
+    ]
+// truncated ... 
+```
+
+```javascript 
+// cart webpack.config.js file
+// truncated ... 
+    plugins: [
+        new ModuleFederationPlugin({
+            name: 'cart',
+            filename: 'remoteEntry.js', 
+            exposes: {
+                './CartShow':'./src/index'
+            }, 
+            shared: ['faker']
+        }),
+        new HtmlWebpackPlugin({
+            template: './public/index.html'
+        })
+    ]
+// truncated ... 
+```
+
+3. Because we made a chage to the webpack.config.js files of both `cart` and `products` we will need to restart these services for the config changes to take affect.
+
+```javascript 
+// ecomm/cart
+npm run start
+```
+
+```javascript 
+// ecomm/products
+npm run start
+```
+
+4. Now if you nav to your browser and look at the network tab, you can see there is only 1 instance of faker being shared by both cart and products MFES. 
+
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/8760590/124363076-59cd5a00-dbf6-11eb-94ee-4c315223617b.png" width="450">
+</p>
+
+
+> NOTE: That while we were able to share the `faker` module while runing container, we __break__ the products MFE from running by itself. Why? Because if webpack runs asynchronously... and when we load `products` our first statement in the javascript file is to `import faker` ... but when we share the file running from container, `products` hasn't had `faker` loaded and we therefore receive an error. So when sharing ... the container will run fine ... but will break the rendering of the individual MFE. 
+
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/8760590/124363149-db24ec80-dbf6-11eb-9b21-d2440d598102.png" width="450">
+</p>
+
+5. To fix this error, and make the `products` and `container` MFE still render the import statements in an ascync manner, we need to use the `import()` function method that we used in our pattern in container. Note in the `container` MFE, we don't use an `import faker` statement ... instead we use an `import(_something_)` function. The use of the function versus the statement allows JS to manage the async rendering of the `products` MFE. 
+
+6. Nav to the `products/src` folder and create a file called `bootstrap.js`
+
+7. Copy all the content of the `products/src/index.js` and paste the code to the newly created `products/src/bootstap.js`. 
+
+8. Now in the `products/src/index.js` file, simply add 
+
+```javascript
+import('./bootstrap');
+```
+
+> NOTE: This may all seem administrative and pointless, but what we are trying to do is allow webpack to asyncronously load the code that requires the faker module. 
+
+9. Now you can see in the browser that both the `container` and the `products` MFEs both work correctly. 
+
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/8760590/124363539-06104000-dbf9-11eb-8e2c-c8237d8ee545.png" width="450">
+</p>
+
+> NOTE: You'll see this same behaviour with the async loading happening in the `cart` MFE ... so go to the `cart/src` file and repeat the `import()` function pattern. 
+
+#### Verison impact with shared modules
+
+1. So as already has been stated, one of the benefits of MFEs is that 2 different teams can work independently. Well what happens if 2 teams are sharing a faker module, but using different version of the module? 
