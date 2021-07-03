@@ -219,3 +219,39 @@ npm i
   </body>
 </html>
 ```
+
+14. Inside of the `cart` dir, create a sub dir called `src` and and `index.js` file. Input the following code to the index.js file. 
+
+```javascript
+import  faker from 'faker';
+
+const cartText = `<div>You have ${faker.datatype.number()`} items in your cart.</div>`;
+
+document.querySelector('#dev-cart').innerHTML = cartText;
+```
+
+15. Finally we need to create a `webpack.config.js` file.
+
+```javascript
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPlugin');
+
+module.exports = {
+    mode: "development", 
+    devServer: {
+        port: 8083
+    },
+    plugins: [
+        new ModuleFederationPlugin({
+            name: 'cart',
+            filename: 'remoteEntry.js', 
+            exposes: {
+                './CartShow':'./src/index'
+            }
+        }),
+        new HtmlWebpackPlugin({
+            template: './public/index.html'
+        })
+    ]
+}
+```
