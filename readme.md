@@ -341,3 +341,7 @@ console.log('Container!');
 <p align="center">
   <img src="https://user-images.githubusercontent.com/8760590/124355350-e152a300-dbcd-11eb-9d4c-e963ae5471fe.png" width="450">
 </p>
+
+- [ ] Benefits of using this pattern are that 3 different teams can all be working on functionality independent of one another. They can choose their own stack, own design process, and otherwise work entirely independent of the other two teams so long as they 1. use the `webpack` and 2. utilize the `ModuleFederationPlugin`
+
+- [ ] Realize also that the `index.html` files for the _Cart_ and _Products_ MFEs are not used in production. When we deploy the app, the _Container_ index.html file is the only file being rendered from a _View_ perspective. The _Cart_ and _Product_ .html file are really there for the independent teams to test and dev with. Therefore, these .html files are usually very light in CSS and other Markup. They are simply trying to render the functionatily. The only files that are going to prod deployment are the `index.js` files within the MFEs. 
